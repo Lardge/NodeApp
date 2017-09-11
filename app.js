@@ -3,7 +3,7 @@ const path = require('path');
 const mysql = require('mysql');
 const app = express();
 
-var con = mysql.createConnection({
+/*var con = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: ""
@@ -12,7 +12,7 @@ var con = mysql.createConnection({
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
-});
+});*/
 
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
