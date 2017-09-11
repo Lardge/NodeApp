@@ -4,14 +4,19 @@
   "description": "test",
   "main": "app.js",
   "dependencies": {
+    "crawler": "^1.0.5",
     "express": "^4.15.4",
     "mongodb": "^2.2.31",
-    "mysql": "^2.14.1"
+    "mysql": "^2.14.1",
+    "node-schedule": "^1.2.4"
   },
   "devDependencies": {},
   "scripts": {
     "test": "test"
   },
   "author": "Lars",
-  "license": "ISC"
+  "license": "ISC",
+    "brackets-node-debugger": {
+        
+    }
 }
