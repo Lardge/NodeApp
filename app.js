@@ -27,18 +27,21 @@ app.listen(3000, function () {
     console.log('Example app listening on port 3000!');
 })
 
+var array = [];
+
 var c = new crawler({
-    maxConnections : 10,
+    maxConnections: 10,
     rateLimit: 1000,
     // This will be called for each crawled page
-    callback : function (error, res, done) {
-        if(error){
+    callback: function (error, res, done) {
+        if (error) {
             console.log(error);
-        }else{
+        } else {
             var $ = res.$;
             // $ is Cheerio by default
             //a lean implementation of core jQuery designed specifically for the server
             console.log($("title").text());
+            array.push(res.$);
         }
         done();
     }
@@ -64,20 +67,45 @@ c.queue('http://www.avanza.se');
         }
         done();
     }
-}]);*/
-
+}])
 // Queue some HTML code directly without grabbing (mostly for tests)
 c.queue([{
     html: '<p>This is a <strong>test</strong></p>'
-}]);
+}]);;*/
+
 
 var schedule = require('node-schedule');
 var rule = new schedule.RecurrenceRule();
 rule.dayOfWeek = [0, new schedule.Range(0, 6)];
 rule.hour = 9;
 rule.minute = 0;
- 
-var j = schedule.scheduleJob(rule, function(){
-  console.log('The world is going to end today.');
+
+var j = schedule.scheduleJob(rule, function () {
+    console.log('The world is going to end today.');
     c.queue('http://www.avanza.se');
 });
+
+j.cancel();
+
+process.stdin.resume(); //so the program will not close instantly
+
+function exitHandler(options, err) {
+    if (options.cleanup) console.log('clean');
+    if (err) console.log(err.stack);
+    if (options.exit) process.exit();
+}
+
+//do something when app is closing
+process.on('exit', exitHandler.bind(null, {
+    cleanup: true
+}));
+
+//catches ctrl+c event
+process.on('SIGINT', exitHandler.bind(null, {
+    exit: true
+}));
+
+//catches uncaught exceptions
+process.on('uncaughtException', exitHandler.bind(null, {
+    exit: true
+}));
