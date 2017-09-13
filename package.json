@@ -4,6 +4,7 @@
   "description": "test",
   "main": "app.js",
   "dependencies": {
+    "body-parser": "^1.18.0",
     "crawler": "^1.0.5",
     "express": "^4.15.4",
     "mongodb": "^2.2.31",
@@ -16,7 +17,5 @@
   },
   "author": "Lars",
   "license": "ISC",
-    "brackets-node-debugger": {
-        
-    }
+  "brackets-node-debugger": {}
 }

@@ -1,8 +1,23 @@
+//Depencenies
 const express = require('express');
+const bodyParser = require('body-parser');
 const path = require('path');
 const mysql = require('mysql');
+const crawler = require("crawler");
+//The app
 const app = express();
-var crawler = require("crawler");
+//Configs
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+app.use(bodyParser.json());
+
+app.post('/getdata', function (req, res) {
+    var query1 = req.body.var1;
+    var query2 = req.body.var2;
+    res.end("yes");
+});
+
 
 /*var con = mysql.createConnection({
   host: "localhost",
@@ -17,6 +32,11 @@ con.connect(function(err) {
 
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
+})
+
+
+app.get('/js/*', function (req, res) {
+    res.sendFile(path.join(__dirname + '/core.js'));
 })
 
 app.get('/test.html', function (req, res) {
