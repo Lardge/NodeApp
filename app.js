@@ -8,11 +8,11 @@ const crawler = require("crawler");
 const app = express();
 //Configs
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: true
 }));
 app.use(bodyParser.json());
 
-app.post('/getdata', function (req, res) {
+app.post('/', function (req, res) {
     var query1 = req.body.var1;
     var query2 = req.body.var2;
     res.end("yes");
@@ -35,8 +35,8 @@ app.get('/', function (req, res) {
 })
 
 
-app.get('/js/*', function (req, res) {
-    res.sendFile(path.join(__dirname + '/core.js'));
+app.get('/js/core.js', function (req, res) {
+    res.sendFile(path.join(__dirname + '/js/core.js'));
 })
 
 app.get('/test.html', function (req, res) {
